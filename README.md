@@ -1,1 +1,1 @@
-# COmmunities-in-HD
+# Communities-in-HD
