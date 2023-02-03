@@ -2,7 +2,7 @@
 ## by Burgazzi et al. 2020
 #  https://doi.org/10.1111/fwb.13599
 
-# The original dataset used in the paper has been collected in Parma, Enza and Nure streams (in Northern Italy)
+# The original dataset used in the paper has been collected in Parma, Enza and Nure streams (in Northern Italy). In this script, we used simulated data
 # Each stream has been sampled twice (one sampling in summer and one sampling in winter), resulting in a total of 300 macroinvertebrate samples
 # For each campaign macroinvertebrate samples have been collected according to 50-points random sampling grids
 # The macroinvertebrate dataset (macro) is a 300x78 community matrix
