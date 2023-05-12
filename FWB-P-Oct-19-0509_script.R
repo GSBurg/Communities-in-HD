@@ -39,7 +39,7 @@ library(mgcv)
 
 # the following model is for taxon richness, for the other models just replace "ntaxa" in the formula with the name of the other macroinvertebrate metrics
 # the smoothing function is applied to coordinates
-# the "by" option allow to produce a different smooth for each factor level
+# the "by" option allows to produce a different smooth for each factor level
 env$ntaxa <- specnumber(macro)
 
 metric.gam <- gam(log(ntaxa) ~ campaign + BOM + vel + depth + sub + 
