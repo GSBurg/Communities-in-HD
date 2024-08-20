@@ -2,11 +2,14 @@
 ## by Burgazzi et al. 2020
 #  https://doi.org/10.1111/fwb.13599
 
-# The original dataset used in the paper has been collected in Parma, Enza and Nure streams (in Northern Italy). In this script, we used simulated data
-# Each stream has been sampled twice (one sampling in summer and one sampling in winter), resulting in a total of 300 macroinvertebrate samples
+# The original dataset used in the paper has been collected in Parma, Enza and Nure streams (in Northern Italy). 
+# In this script, we used simulated data
+# Each stream has been sampled twice (one sampling in summer and one sampling in winter), 
+# resulting in a total of 300 macroinvertebrate samples
 # For each campaign macroinvertebrate samples have been collected according to 50-points random sampling grids
 # The macroinvertebrate dataset (macro) is a 300x78 community matrix
-# The covariate dataset (env) is composed by 4 environmental numerical variables (flow velocity, water depth, substrate size and benthic organic matter) and by spatial coordinates within each grid
+# The covariate dataset (env) is composed by 4 environmental numerical variables (flow velocity, water depth, substrate size and benthic organic matter) 
+# and by spatial coordinates within each grid
 
 
 ## Generate the datasets===============================================
@@ -97,7 +100,8 @@ Hmsc_model_camp_red <- Hmsc(Y=Y_camp_red, XFormula=~vel+depth+sub+BOM, XData=X_c
                           distr = "lognormal poisson", studyDesign = studyDesign_camp, ranLevels = list(replica=rL_camp))
 
 # be careful, time consuming
-Hmsc_model_camp_red <-  sampleMcmc(Hmsc_model_camp_red, samples = samples, thin=thin, adaptNf=rep(ceiling(0.4*samples*thin),1), transient = ceiling(0.5*samples*thin), nChains = nChains)
+Hmsc_model_camp_red <-  sampleMcmc(Hmsc_model_camp_red, samples = samples, thin=thin, adaptNf=rep(ceiling(0.4*samples*thin),1), 
+                                   transient = ceiling(0.5*samples*thin), nChains = nChains)
 
 ## compute mixing statistics
 mpost_camp_red = convertToCodaObject(Hmsc_model_camp_red)
@@ -161,5 +165,7 @@ library(corrplot)
 OmegaCor_camp_red = computeAssociations(Hmsc_model_camp_red)
 supportLevel = 0.90
 plotOrder_camp_red = corrMatOrder(OmegaCor_camp_red[[1]]$mean,order="AOE")
-toPlot_camp_red = ((OmegaCor_camp_red[[1]]$support>supportLevel) + (OmegaCor_camp_red[[1]]$support<(1-supportLevel))>0)*OmegaCor_camp_red[[1]]$mean
-corrplot(toPlot_camp_red[plotOrder_camp_red,plotOrder_camp_red], diag = F, type = "lower", tl.col="black", tl.cex=0.7, cex.main=1.3, tl.srt = 45, mar=c(0.1,0.1,1,0.1), col = colorRampPalette(c("blue", "white", "red"))(200))
+toPlot_camp_red = ((OmegaCor_camp_red[[1]]$support>supportLevel) + 
+                   (OmegaCor_camp_red[[1]]$support<(1-supportLevel))>0)*OmegaCor_camp_red[[1]]$mean
+corrplot(toPlot_camp_red[plotOrder_camp_red,plotOrder_camp_red], diag = F, type = "lower", tl.col="black", 
+         tl.cex=0.7, cex.main=1.3, tl.srt = 45, mar=c(0.1,0.1,1,0.1), col = colorRampPalette(c("blue", "white", "red"))(200))
